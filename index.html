@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/juanbrujo/tinyModal/dist/tinyModal.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"
+        integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
+        integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/gh/juanbrujo/tinyModal/dist/tinyModal.min.js"></script>
+    <script src="./static/static2.js"></script>
+    <title>Photo Feeds</title>
+</head>
+
+<style>
+    aside .cardImage {overflow: hidden}
+    aside img {max-height: 500px}
+    .photoCard img {width: 16rem;height: 16rem;object-fit: cover}
+    .tinymodal-inner {overflow: hidden}
+    .tinymodal-window-open .tinymodal-close {background-color: unset}
+    .tinymodal-window{padding:0}
+    #btImgNav {
+        position: absolute;
+        top: 46%;
+        color: #FFF;
+        opacity: 0.7;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 25px;
+    }
+    #btImgNav .next, .before {text-shadow: 0 0 1px #000}
+    #btBack {
+        position: absolute;
+        opacity: 0.7;
+        cursor: pointer;
+        color:#CCC;
+        text-shadow: 0 0 1px #000;
+    }
+    dots div {background-color: rgba(0, 0, 0, .3)}
+    .dotsActive {background-color: rgba(0, 0, 0, .8)}
+    @media only screen and (max-width: 768px) {
+        .tinymodal-window {padding: 6px;transform: unset;overflow: hidden}
+        .tinymodal-active .tinymodal-window-open {transform: unset}
+        .tinymodal-window {left: 0%;top: 0%;height: 100%}
+        #btImgNav{top:23%}
+    }
+</style>
+
+<body class="serif">
+    <div class="flex justify-center">
+        <h1 class="f2 f1-m f-subheadline-l fw4 tracked athelas">Feeds</h1>
+    </div>
+    <div id="main" class="flex flex-column items-center">
+    </div>
+    <aside id="photoModal" class="tinymodal-window">
+        <div class="tinymodal-inner">
+            <div class="cardImage ">
+                <div id="btBack" class="tinymodal-close pa1 dn-ns">
+                    <i class="fas fa-2x fa-arrow-circle-left"></i>
+                </div>
+                <div id="btImgNav">
+                    <i class="before fas fa-chevron-circle-left pointer"></i>
+                    <i class="next fas fa-chevron-circle-right pointer"></i>
+                </div>
+                <img class="">
+            </div>
+            <dots class="flex justify-center w-100"></dots>
+            <div class="cardCaption w5 h3 mh3 mv1 overflow-auto">
+                <em class="f7"></em>
+                <p class="f7"></p>
+            </div>
+        </div>
+    </aside>
+</body>
+<script src="./js/app.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/aFarkas/lazysizes/lazysizes.min.js" async=""></script>
+</html>
