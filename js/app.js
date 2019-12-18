@@ -6,7 +6,6 @@ function viewDetail(self, currIndex) {
     const dots = document.querySelector('aside dots')
     const imgUrl = self.querySelector('.cardImage img').getAttribute('data-src')
     const date = self.querySelector('.cardCaption em').textContent
-    const caption = self.querySelector('.cardCaption p').textContent
     const imgNav = document.querySelector('aside #btImgNav')
     const len = posts[currIndex].length
     tinyModal.openModal('#photoModal', () => {
@@ -24,11 +23,12 @@ function viewDetail(self, currIndex) {
             dots.innerHTML = innerDots
         }
         document.querySelector('aside .next').setAttribute('onclick', `next(self, ${currIndex}, ${len})`)
-        document.querySelector('aside .before').setAttribute('onclick', `before(self, ${currIndex})`)
+        document.querySelector('aside .prev').setAttribute('onclick', `prev(self, ${currIndex})`)
         document.querySelector('aside .cardImage img').setAttribute('src', imgUrl)
         document.querySelector('aside .cardCaption em').textContent = date
-        document.querySelector('aside .cardCaption p').textContent = caption
+        document.querySelector('aside .cardCaption p').textContent = posts[currIndex][currPost].title
         computeImgNav(document.querySelector('aside .cardImage img'))
+        img.src = posts[currIndex][preLoadIndex(currPost, len, 'next')].image
     })
 }
 
@@ -39,6 +39,8 @@ function next(self, currIndex, len) {
         currPost = len - 1
         return
     }
+    const nextImg = preLoadIndex(currPost, len, 'next')
+    img.src = posts[currIndex][nextImg].image
     dots.querySelectorAll('div')[currPost].className = 'dotsActive pa1 mh1 br-100'
     dots.querySelectorAll('div')[currPost - 1].className = 'pa1 mh1 br-100'
 
@@ -48,13 +50,15 @@ function next(self, currIndex, len) {
     computeImgNav(document.querySelector('aside .cardImage img'))
 }
 
-function before(self, currIndex) {
+function prev(self, currIndex) {
     const dots = document.querySelector('aside dots')
     currPost--
     if (currPost < 0) {
         currPost = 0
         return
     }
+    const prevImg = preLoadIndex(currPost, 0, 'prev')
+    img.src = posts[currIndex][prevImg].image
     dots.querySelectorAll('div')[currPost].className = 'dotsActive pa1 mh1 br-100'
     dots.querySelectorAll('div')[currPost + 1].className = 'pa1 mh1 br-100'
 
@@ -67,6 +71,11 @@ function before(self, currIndex) {
 
 function computeImgNav(currImg) {
     document.querySelector('aside #btImgNav').style.top = Number.parseInt(getComputedStyle(currImg).height) / 2 + 'px'
+}
+
+function preLoadIndex(currPost, len, mode){
+    if(mode === 'prev') return currPost - 1 < len ? 0 : currPost - 1
+    return currPost + 1 > len - 1 ? len - 1 : currPost + 1
 }
 
 function loadMore() {
